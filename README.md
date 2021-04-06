@@ -1,6 +1,8 @@
 # Expense Tracker
 
-Keep track of income and expenses. Add and remove items and save to local storage
+Keep track of income and expenses. Add and remove items and save to local storage.
+Live version of the app can be found [here].
+(https://pchelka84.github.io/expense_tracker/)
 
 ## Project Specifications
 
