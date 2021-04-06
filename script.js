@@ -30,11 +30,30 @@ function addTransactionDOM(transaction) {
  list.appendChild(item);
 }
 
+// Update balance, income, expense
+function updateValues() {
+  const amount = transactions.map(transaction => transaction.amount);
+  const total = amount.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const income = amount
+                  .filter(item => item > 0)
+                  .reduce((acc, item) => (acc+= item), 0)
+                  .toFixed(2);
+  const expense = (amount
+                    .filter(item => item < 0)
+                    .reduce((acc, item) => (acc+=item), 0) * - 1)
+                    .toFixed(2);
+
+  balance.innerHTML = `${total}`;
+  moneyMinus.innerHTML = `${expense}`;
+  moneyPlus.innerHTML = `${income}`;
+}
+
 // Init app 
 function init() {
   list.innerHTML='';
 
   transactions.forEach(addTransactionDOM);
+  updateValues();
 }
 
 init();
