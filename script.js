@@ -5,6 +5,8 @@ const list = document.getElementById('list');
 const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount'); 
+const error = document.getElementById('error-container');
+const close = document.querySelector('.close');
 
 // const dummyTransactions = [
 //   {id: 1, text: "Flower", amount: -30},
@@ -22,21 +24,22 @@ function addTransaction(e) {
   e.preventDefault();
 
   if (text.value.trim() === '' || amount.value.trim() === '') {
-    alert('Please add a text and amount');
+    error.style.display = 'block';
   } else {
     const transaction = {
       id: generateID(),
       text: text.value,
       amount: +amount.value
     }
-
+    
     transactions.push(transaction);
     addTransactionDOM(transaction);
-
+    
+    closeErrorMessage(); 
     updateValues();
     updateLocalStorage();
     text.value = ''
-    amount.value= ''
+    amount.value= '';
   }
 }
 
@@ -90,6 +93,11 @@ function updateLocalStorage() {
   localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 
+// Close error message 
+function closeErrorMessage() {
+  error.style.display ='';
+}
+
 // Init app 
 function init() {
   list.innerHTML='';
@@ -100,4 +108,5 @@ function init() {
 
 init();
 
-form.addEventListener('submit', addTransaction)
+form.addEventListener('submit', addTransaction);
+close.addEventListener('click', closeErrorMessage);
